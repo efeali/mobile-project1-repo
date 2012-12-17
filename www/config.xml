@@ -13,5 +13,5 @@ A simple PhoneGap Build application.
 <author href="http://aedevelopment.net" email="efeali@gmail.com">
 Ali Efe
 </author>
-
+<access origin="http://theiamzone.com" />
 </widget>

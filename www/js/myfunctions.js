@@ -34,10 +34,14 @@ $(document).delegate("#myDevice","pageinit",function(){
 	
 })
 
-var watchID, geoWatchID; // this will be used for compass
+var watchID, geoWatchID, serverUpdateTimer; // this will be used for compass
+var myPosition;
+var userID = 1;
+
 $(document).delegate("#navAndCompass", "pageinit", function(){
 	watchID = navigator.compass.watchHeading(compSuccess, compError, { frequency :5000 });
-	geoWatchID = navigator.geolocation.getCurrentPosition(navSuccess, navError, {timeout:30000});
+	geoWatchID = navigator.geolocation.watchPosition(navSuccess, navError, {timeout:30000, enableHighAccuracy:true});
+	
 
 })
 
@@ -54,7 +58,7 @@ function compSuccess(heading)
 }
 function compError(compassError)
 {
-	alert('compass error : '+compassError.code);
+	$('#compass').html('compass error : '+compassError.code);
 }
 
 function navSuccess(position)
@@ -68,6 +72,8 @@ function navSuccess(position)
 	content += 'Heading: ' + position.coords.heading +'<br />';
 	content += 'Speed: ' + position.coords.speed +'<br />';
 	$('#myNavigator').html(content);
+	myPosition = position;
+	
 }
 function navError(error)
 {
@@ -84,4 +90,22 @@ function showBatteryLevel(info)
 	else
 		content += 'Device is not plugged to power';
 	$('#batteryInfo').html(content);
+}
+
+function updateServer()
+{
+	var pos = new Array();
+	pos = myPosition.coords;
+	$.ajax({
+		type:"POST",
+		cache:false,
+		timeout:3000,
+		url:"http://theiamzone.com/ali_efe/mobile-app/api-port.php",
+		data:{position:pos, uid:userID}
+	})
+	serverUpdateTimer = setTimeout(updateServer,30000);
+}
+function stopServer()
+{
+	alert('Updating server stopped');
 }
