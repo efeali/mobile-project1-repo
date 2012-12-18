@@ -41,7 +41,9 @@
                 <ul data-role="listview">
 					<li><a href="#connection">Connection</a></li>
                     <li><a href='#myDevice'>Device information</a></li>  
-                    <li><a href="#navAndCompass">Navigation</a></li>              
+                    <li><a href="#navAndCompass">Navigation</a></li>   
+                    <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>           
                 </ul>
             </div>
         </div>
@@ -56,6 +58,8 @@
                 	<li><a href="#home">Back to home</a></li>
                     <li><a href='#myDevice'>Device information</a></li>
                     <li><a href="#navAndCompass">Navigation</a></li>
+                    <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -74,6 +78,8 @@
                 	<li><a href="#home">Back to home</a></li>
                     <li><a href="#connection">Connection</a></li>
                     <li><a href="#navAndCompass">Navigation</a></li>
+                    <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -96,10 +102,69 @@
                 	<li><a href="#home">Back to home</a></li>
                     <li><a href="#connection">Connection</a></li>
                     <li><a href='#myDevice'>Device information</a></li>
+                    <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>
                 </ul>
             </div>
         
         </div>
+        
+        <div data-role="page" id="createContact">
+        	<div data-role="header">
+            	<h1>Create a new contact</h1>
+            </div>	
+            <div data-role="content">
+            	<h3>Please enter contact details and click save</h3>
+                <ul data-role="listview">
+                	<li><label for="contactName">Name</label></li>
+                    <li><input type="text" id="contactName" /></li>
+                    <li><label for="contactLName">Last Name</label></li>
+                    <li><input type="text" id="contactLName" /></li>
+                    <li><label for="contactPhone">Phone</label></li>
+                    <li><input type="tel" id="contactPhone" /></li>
+                    <li><label for="contactEmail">Email</label></li>
+                    <li><input type="email" id="contactEmail" /></li>
+                    <li>&nbsp;</li>
+                    <li><input type="button" value="Save" onClick="saveContact()" /></li>
+                </ul>
+            </div>
+             <div data-role="footer">
+            	<ul data-role="listview">
+                	<li><a href="#home">Back to home</a></li>
+                    <li><a href="#connection">Connection</a></li>
+                    <li><a href="#navAndCompass">Navigation</a></li>
+                    <li><a href='#myDevice'>Device information</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div data-role="page" id="searchContact">
+        	<div data-role="header">
+            	<h1>Search Contact</h1>
+            </div>	
+            <div data-role="content">
+            	<h3>Please enter contact name to search</h3>
+                <ul data-role="listview" id="contactSearchBox">
+                	<li><label for="contactName">Name</label></li>
+                    <li><input type="text" id="contactName" /></li>
+                    <li>&nbsp;</li>
+                    <li><input type="button" value="Search" onClick="searchContact()" /></li>
+                </ul>
+               <div id="contactsList" data-role="fieldcontain"></div>
+                <div style="clear:both; width:100%"></div>
+            </div>
+             <div data-role="footer">
+            	<ul data-role="listview">
+                	<li><a href="#home">Back to home</a></li>
+                    <li><a href="#connection">Connection</a></li>
+                    <li><a href="#navAndCompass">Navigation</a></li>
+                    <li><a href='#myDevice'>Device information</a></li>
+                    <li><a href="#createContact">Create Contact</a></li>
+                </ul>
+            </div>
+        </div>
+     
     
         <script type="text/javascript">
             app.initialize();

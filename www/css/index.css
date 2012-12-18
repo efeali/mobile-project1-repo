@@ -113,3 +113,12 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+#contactsList
+{
+	dislpay:none;
+}
+#contactsList ul li ul
+{
+	display:none;
+}
