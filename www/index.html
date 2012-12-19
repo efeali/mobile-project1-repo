@@ -90,11 +90,12 @@
             </div>
             <div data-role="content">
             	<h3>In this page I am trying to display navigation and compass information</h3>
+                <h4 id="serverUpdateStatus"></h4>
                 <p id="compass"></p>
                 <p id="myNavigator"></p>
                 <ul data-role="listview">
-                	<li><a href="#" data-role="button" onClick="updateServer()">Update Server</a></li>
-                    <li><a href="#" data-role="button" onClick="stopServer()">Stop Server</a></li>
+                	<li id="updateStartButton"><a href="#" data-role="button" onClick="updateServer()">Update Server</a></li>
+                    <li id="updateStopButton"><a href="#" data-role="button" onClick="stopServer()">Stop Server</a></li>
             	</ul>
             </div>
             <div data-role="footer">
@@ -146,8 +147,8 @@
             <div data-role="content">
             	<h3>Please enter contact name to search</h3>
                 <ul data-role="listview" id="contactSearchBox">
-                	<li><label for="contactName">Name</label></li>
-                    <li><input type="text" id="contactName" /></li>
+                	<li><label for="contactNameSearch">Name</label></li>
+                    <li><input type="text" id="contactNameSearch" /></li>
                     <li>&nbsp;</li>
                     <li><input type="button" value="Search" onClick="searchContact()" /></li>
                 </ul>

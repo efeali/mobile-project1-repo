@@ -122,3 +122,13 @@ h1 {
 {
 	display:none;
 }
+#serverUpdateStatus
+{
+	font-style:italic;
+	font-weight:normal;
+	letter-spacing:0.1em;
+}
+#updateStopButton
+{
+	display:none;
+}

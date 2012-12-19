@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:my phonegap app.xcodeproj">
+      location = "self:myphonegapapp.xcodeproj">
    </FileRef>
 </Workspace>

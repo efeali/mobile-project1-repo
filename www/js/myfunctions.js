@@ -1,7 +1,12 @@
+var states = {}; // for connection state
+var watchID, geoWatchID, serverUpdateTimer; // this will be used for compass
+var myPosition;
+var userID = 1;
+
+
 function checkConnection()
 {
 	var networkState = navigator.connection.type;
-	var states = {};
 	states[Connection.UNKNOWN]  = 'Unknown connection';
 	states[Connection.ETHERNET] = 'Ethernet connection';
 	states[Connection.WIFI] = 'Wifi connection';
@@ -34,13 +39,11 @@ $(document).delegate("#myDevice","pageinit",function(){
 	
 })
 
-var watchID, geoWatchID, serverUpdateTimer; // this will be used for compass
-var myPosition;
-var userID = 1;
+
 
 $(document).delegate("#navAndCompass", "pageinit", function(){
 	watchID = navigator.compass.watchHeading(compSuccess, compError, { frequency :5000 });
-	geoWatchID = navigator.geolocation.watchPosition(navSuccess, navError, {timeout:30000, enableHighAccuracy:true});
+	geoWatchID = navigator.geolocation.watchPosition(navSuccess, navError, {timeout:30000, maximumAge:30000, enableHighAccuracy:true});
 	
 
 })
@@ -92,22 +95,30 @@ function showBatteryLevel(info)
 	$('#batteryInfo').html(content);
 }
 
-function updateServer()
+function updateServer(obj)
 {
 	var pos = new Array();
+	navigator.geolocation.getCurrentPosition(navSuccess, navError, {timeout:30000, maximumAge:30000, enableHighAccuracy:true});
+	$('#updateStopButton').css('display','block');
+	$('#updateStartButton').css('display','none');
+	$('#serverUpdateStatus').html('Server update is active').css('color','#C00');
 	pos = myPosition.coords;
 	$.ajax({
 		type:"POST",
 		cache:false,
 		timeout:3000,
 		url:"http://theiamzone.com/ali_efe/mobile-app/api-port.php",
-		data:{position:pos, uid:userID}
+		data:{position:pos, uid:userID, dev:device.name}
 	})
-	serverUpdateTimer = setTimeout(updateServer,30000);
+	serverUpdateTimer = setTimeout(updateServer,120000);
+	
 }
 function stopServer()
 {
-	alert('Updating server stopped');
+		clearTimeout(serverUpdateTimer);
+		$('#updateStopButton').css('display','none');
+		$('#updateStartButton').css('display','block');
+		$('#serverUpdateStatus').html('Server update stopped').css('color','#069');
 }
 
 function saveContact()
@@ -142,11 +153,13 @@ function saveContact()
 
 function searchContact()
 {
-	var name = document.getElementById('contactName').value;
+	var name = document.getElementById('contactNameSearch').value;
 	var opts = new ContactFindOptions();
 	opts.filter = name;
 	opts.multiple = true;
-	var fields = ["displayName", "name","phoneNumbers"];
+	var fields = ["name","phoneNumbers"];
+	$('#contactsList').empty();
+	$('#contactsList').css('display','none');
 	navigator.contacts.find(fields, contactFindSuccess, function(){alert('Contact search error');}, opts);
 }
 function contactFindSuccess(contacts)
@@ -179,6 +192,12 @@ function contactFindSuccess(contacts)
 		$('#contactsList li a').click(function(){
 			$(this).parent('li').children('ul').toggle();
 		});
+		contacts = "";
 		
 	}
+	else
+	{
+		alert('No contact found');
+	}
+	document.getElementById('contactNameSearch').value = "";
 }
