@@ -4,4 +4,5 @@
 <dict/>
     <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
     <plugin name="Contacts" value="org.apache.cordova.ContactManager" />
+	<plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
 </plist>

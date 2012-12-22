@@ -43,7 +43,8 @@
                     <li><a href='#myDevice'>Device information</a></li>  
                     <li><a href="#navAndCompass">Navigation</a></li>   
                     <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>           
+                    <li><a href="#searchContact">Search Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>           
                 </ul>
             </div>
         </div>
@@ -60,6 +61,7 @@
                     <li><a href="#navAndCompass">Navigation</a></li>
                     <li><a href="#createContact">Create Contact</a></li>
                     <li><a href="#searchContact">Search Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>
                 </ul>
             </div>
         </div>
@@ -80,6 +82,7 @@
                     <li><a href="#navAndCompass">Navigation</a></li>
                     <li><a href="#createContact">Create Contact</a></li>
                     <li><a href="#searchContact">Search Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>
                 </ul>
             </div>
         </div>
@@ -105,6 +108,7 @@
                     <li><a href='#myDevice'>Device information</a></li>
                     <li><a href="#createContact">Create Contact</a></li>
                     <li><a href="#searchContact">Search Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>
                 </ul>
             </div>
         
@@ -136,6 +140,7 @@
                     <li><a href="#navAndCompass">Navigation</a></li>
                     <li><a href='#myDevice'>Device information</a></li>
                     <li><a href="#searchContact">Search Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>
                 </ul>
             </div>
         </div>
@@ -162,6 +167,32 @@
                     <li><a href="#navAndCompass">Navigation</a></li>
                     <li><a href='#myDevice'>Device information</a></li>
                     <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#cameraPage">Use Camera</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div data-role="page" id="cameraPage">
+        	<div data-role="header">
+            	<h1>Camera</h1>
+            </div>
+            <div data-role="content">
+            	<h3>Use your camera to take some pictures.</h3><p data-role="content">You can choose to whether save them or upload to server</p>
+                <p id="imageStatus"></p>
+                <ul data-role="listview">
+                	<li><input type="button" value="Take picture" onClick="takePicture()" /></li>
+                    <li id="pictureUploadBtn"><input type="button" value="Send to server" onClick="uploadPicToServer()" /></li>
+                    <li id="seeServerPics"><input type="button" value="See pics on server" onClick="window.location.href='http://theiamzone.com/ali_efe/mobile-app/images/';" /></li>
+                </ul>
+            </div>
+            <div data-role="footer">
+            	<ul data-role="listview">
+                	<li><a href="#home">Back to home</a></li>
+                    <li><a href="#connection">Connection</a></li>
+                    <li><a href="#navAndCompass">Navigation</a></li>
+                    <li><a href='#myDevice'>Device information</a></li>
+                    <li><a href="#createContact">Create Contact</a></li>
+                    <li><a href="#searchContact">Search Contact</a></li>
                 </ul>
             </div>
         </div>

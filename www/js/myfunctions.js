@@ -1,5 +1,5 @@
 var states = {}; // for connection state
-var watchID, geoWatchID, serverUpdateTimer; // this will be used for compass
+var watchID, geoWatchID, serverUpdateTimer, imageURI; // this will be used for compass
 var myPosition;
 var userID = 1;
 
@@ -39,13 +39,15 @@ $(document).delegate("#myDevice","pageinit",function(){
 	
 })
 
-
-
 $(document).delegate("#navAndCompass", "pageinit", function(){
 	watchID = navigator.compass.watchHeading(compSuccess, compError, { frequency :5000 });
 	geoWatchID = navigator.geolocation.watchPosition(navSuccess, navError, {timeout:30000, maximumAge:30000, enableHighAccuracy:true});
 	
 
+})
+
+$(document).delegate("#cameraPage", "pageinit", function(){
+	$('#imageStatus').css('display','none');
 })
 
 window.addEventListener("batterystatus", showBatteryLevel, false);
@@ -108,7 +110,7 @@ function updateServer(obj)
 		cache:false,
 		timeout:3000,
 		url:"http://theiamzone.com/ali_efe/mobile-app/api-port.php",
-		data:{position:pos, uid:userID, dev:device.name}
+		data:{navUp:1,position:pos, uid:userID, dev:device.name}
 	})
 	serverUpdateTimer = setTimeout(updateServer,120000);
 	
@@ -174,13 +176,21 @@ function contactFindSuccess(contacts)
 		var theList = '<ul data-role="collapsible">';
 		for(var i =0; i<numContacts; i++)
 		{
-			theList += '<li><a href="#" data-role="button">'+contacts[i].name.givenName+' '+contacts[i].name.familyName+'</a>';
-			theList += '<ul data-role="listview"><li>'+contacts[i].name.givenName+' '+contacts[i].name.familyName+'</li>';
+			theList += '<li><a href="#" data-role="button">'+contacts[i].name.givenName;
+			if(contacts[i].name.familyName != null)
+				theList +=' '+contacts[i].name.familyName;
+			theList +='</a>';
+			theList += '<ul data-role="listview"><li>'+contacts[i].name.givenName;
+			if(contacts[i].name.familyName != null)
+			{
+				theList += ' ' + contacts[i].name.familyName;
+			}
+			theList +='</li>';
 			if(contacts[i].phoneNumbers.length>0)
 			{
 				for(var x=0; x<contacts[i].phoneNumbers.length; x++)
 				{
-					theList +='<li><span>'+contacts[i].phoneNumbers[x].value+'</span> '+contacts[i].phoneNumbers[x].type+'</li>';
+					theList +='<li>'+contacts[i].phoneNumbers[x].value+' <span style="font-style:italic">('+contacts[i].phoneNumbers[x].type+')</span></li>';
 				}
 			}
 			theList +='</ul>';
@@ -200,4 +210,75 @@ function contactFindSuccess(contacts)
 		alert('No contact found');
 	}
 	document.getElementById('contactNameSearch').value = "";
+}
+
+function takePicture()
+{
+	if(navigator.camera != null)
+	{
+		navigator.device.capture.captureImage(pictureSuccess, pictureError);
+	}
+	else
+	{
+		alert('Camera is not supported');
+	}
+}
+function pictureError(message)
+{
+	if(message.code != 3)
+	{
+		$('#imageStatus').html('Failed because: '+message.code).css('display','block');
+	}
+}
+function pictureSuccess(data)
+{
+	imageURI = data[0];
+	$('#imageStatus').html('Image taken').css('display','block');
+	$('#pictureUploadBtn').css('display','block');
+	
+}
+
+ // alert dialog dismissed
+function alertDismissed() {
+        // do something
+    }
+
+
+function uploadPicToServer()
+{
+	$('#imageStatus').html('Sending image').css('color','#F90');
+	
+	var opts = new FileUploadOptions();
+	opts.fileKey = "file";
+	opts.fileName = device.name;
+	opts.mimeType = "image/jpeg";
+	
+	var ft = new FileTransfer();
+	ft.upload(imageURI.fullPath, encodeURI("http://theiamzone.com/ali_efe/mobile-app/api-port.php"), picUploadSuccess, picUploadFail, opts);
+	
+	navigator.camera.cleanup();
+	$('#pictureUploadBtn').css('display','none');
+	
+}
+function picUploadSuccess(r)
+{
+	console.log("Code = "+r.responseCode);
+	console.log("Response = " + r.response);
+	console.log("Sent = " + r.bytesSent);
+	if(r.response == 1)
+	{
+		$('#imageStatus').html('Image uploaded').css('color','#393');
+	}
+	else if(r.response == 0)
+	{
+		$('#imageStatus').html('File uploaded but couldn\'t saved on server').css('color','red');
+	}
+	else
+	{
+		$('#imageStatus').html('File couldn\'t uploaded').css('color','red');
+	}
+}
+function picUploadFail(error)
+{
+	$('#imageStatus').html('something went wrong').css('color','#C60');
 }
