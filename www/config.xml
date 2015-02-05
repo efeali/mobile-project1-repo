@@ -4,14 +4,14 @@
     id        = "com.phonegap.example"
     version   = "1.0.0">
 
-<name>My phonegap App</name>
+<name>WebBlog App</name>
 
 <description>
-A simple PhoneGap Build application.
+Vanarts Test project
 </description>
 
 <author href="http://aedevelopment.net" email="efeali@gmail.com">
 Ali Efe
 </author>
-<access origin="http://theiamzone.com" />
+<access origin="*" />
 </widget>
