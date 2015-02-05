@@ -1,206 +1,77 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.css" />
-        <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.js"></script>
-        <script type="text/javascript" src="cordova-2.2.0.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div data-role="page" id="home">
-            <div data-role="header">
-            	<h1>Home</h1>
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1.0; minimum-scale=1.0; user-scalable=false">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/fastclick.js"></script>
+
+    <title>WebBlog Login</title>
+</head>
+<body>
+
+<div data-role="page">
+    <div data-role="header" data-theme="b">
+        <h2>WebBlog Login</h2>
+    </div>
+    <div data-role="main" class="ui-content">
+        <fieldset>
+            <div class="ui-field-contain">
+                <label for="username">User Name</label>
+                <input type="text" name="username" id="username" value="" required>
             </div>
-            <div data-role="content">
-            	<p></p>
-                <ul data-role="listview">
-					<li><a href="#connection">Connection</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>  
-                    <li><a href="#navAndCompass">Navigation</a></li>   
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>           
-                </ul>
+            <div class="ui-field-contain">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required value="">
             </div>
-        </div>
-        
-        <div data-role="page" id="connection">
-        	<div data-role="header">
-            	<p>Connection Specifications</p>
+            <div class="ui-field-contain">
+                <input type="button" value="Login" id="loginBtn">
             </div>
-            <div data-role="content"></div> 
-            <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>
-                    <li><a href="#navAndCompass">Navigation</a></li>
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div data-role="page" id="myDevice">
-        	<div data-role="header">
-            	<h1>Device Info</h1>
-            </div>
-            <div data-role="content">
-            	<h3>Here is some brief info about your device</h3>
-                <p id="deviceInfo"></p>
-                <p id="batteryInfo"></p>
-            </div>
-            <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href="#connection">Connection</a></li>
-                    <li><a href="#navAndCompass">Navigation</a></li>
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div data-role="page" id="navAndCompass">
-        	<div data-role="header">
-            	<h1>Navigation and Compass</h1>
-            </div>
-            <div data-role="content">
-            	<h3>In this page I am trying to display navigation and compass information</h3>
-                <h4 id="serverUpdateStatus"></h4>
-                <p id="compass"></p>
-                <p id="myNavigator"></p>
-                <ul data-role="listview">
-                	<li id="updateStartButton"><a href="#" data-role="button" onClick="updateServer()">Update Server</a></li>
-                    <li id="updateStopButton"><a href="#" data-role="button" onClick="stopServer()">Stop Server</a></li>
-            	</ul>
-            </div>
-            <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href="#connection">Connection</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>
-                </ul>
-            </div>
-        
-        </div>
-        
-        <div data-role="page" id="createContact">
-        	<div data-role="header">
-            	<h1>Create a new contact</h1>
-            </div>	
-            <div data-role="content">
-            	<h3>Please enter contact details and click save</h3>
-                <ul data-role="listview">
-                	<li><label for="contactName">Name</label></li>
-                    <li><input type="text" id="contactName" /></li>
-                    <li><label for="contactLName">Last Name</label></li>
-                    <li><input type="text" id="contactLName" /></li>
-                    <li><label for="contactPhone">Phone</label></li>
-                    <li><input type="tel" id="contactPhone" /></li>
-                    <li><label for="contactEmail">Email</label></li>
-                    <li><input type="email" id="contactEmail" /></li>
-                    <li>&nbsp;</li>
-                    <li><input type="button" value="Save" onClick="saveContact()" /></li>
-                </ul>
-            </div>
-             <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href="#connection">Connection</a></li>
-                    <li><a href="#navAndCompass">Navigation</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div data-role="page" id="searchContact">
-        	<div data-role="header">
-            	<h1>Search Contact</h1>
-            </div>	
-            <div data-role="content">
-            	<h3>Please enter contact name to search</h3>
-                <ul data-role="listview" id="contactSearchBox">
-                	<li><label for="contactNameSearch">Name</label></li>
-                    <li><input type="text" id="contactNameSearch" /></li>
-                    <li>&nbsp;</li>
-                    <li><input type="button" value="Search" onClick="searchContact()" /></li>
-                </ul>
-               <div id="contactsList" data-role="fieldcontain"></div>
-                <div style="clear:both; width:100%"></div>
-            </div>
-             <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href="#connection">Connection</a></li>
-                    <li><a href="#navAndCompass">Navigation</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#cameraPage">Use Camera</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div data-role="page" id="cameraPage">
-        	<div data-role="header">
-            	<h1>Camera</h1>
-            </div>
-            <div data-role="content">
-            	<h3>Use your camera to take some pictures.</h3><p data-role="content">You can choose to whether save them or upload to server</p>
-                <p id="imageStatus"></p>
-                <ul data-role="listview">
-                	<li><input type="button" value="Take picture" onClick="takePicture()" /></li>
-                    <li id="pictureUploadBtn"><input type="button" value="Send to server" onClick="uploadPicToServer()" /></li>
-                    <li id="seeServerPics"><input type="button" value="See pics on server" onClick="window.location.href='http://theiamzone.com/ali_efe/mobile-app/images/';" /></li>
-                </ul>
-            </div>
-            <div data-role="footer">
-            	<ul data-role="listview">
-                	<li><a href="#home">Back to home</a></li>
-                    <li><a href="#connection">Connection</a></li>
-                    <li><a href="#navAndCompass">Navigation</a></li>
-                    <li><a href='#myDevice'>Device information</a></li>
-                    <li><a href="#createContact">Create Contact</a></li>
-                    <li><a href="#searchContact">Search Contact</a></li>
-                </ul>
-            </div>
-        </div>
-     
-    
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-        <script type="text/javascript" src="js/myfunctions.js"></script>
-    </body>
+        </fieldset>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        document.querySelector('#loginBtn').addEventListener('click',function(){loginCheck();});
+    }
+
+    function loginCheck()
+    {
+        var username = $('#username').val();
+        var pass = $('#password').val();
+
+        $.ajax({
+           url:"http://vancouverwebschool.com/webblog/admin/handler.php?login",
+            data:{u:username, p:pass},
+            type:'POST',
+            dataType:'JSON',
+            timeout:3000,
+            success: function(data)
+            {
+                if(data.result === false)
+                {
+                    alert('Login failed');
+                }
+                else
+                {
+                    var user = {}; // here we create an empty object called user,
+                    user.id = data.uid; // for now we are only adding id property to user to store user id, but if we want we can store more info
+
+                    sessionStorage.setItem('user', JSON.stringify(user)); /// saving user info (id) into HTML5 session
+                    document.location.href = "panel.html";
+                }
+            },
+            error: function(jqXHR, error)
+            {
+                alert('ajax error '+error);
+            }
+        });
+    }
+
+</script>
+
+</body>
 </html>
